@@ -5,10 +5,13 @@ This is amazing
 {% endblock head_title %}
 
 {% block content %}
-Welcome to Pop
+<div class='row text-center'>
+    <div class='col'>
+        <h1>Welcome to Pop</h1>
+    </div>
+</div>
 
-
-<div id='tweets'>
+<div class='row' id='tweets'>
     Loading..
 </div>
 
@@ -31,7 +34,7 @@ function LikeBtn(tweet){
 
 function formatTweetElement(tweet){
 
-    var formattedTweet = "<div class='mb-4 tweet' id='tweet-" + tweet.id
+    var formattedTweet = "<div class='col-12 border py-3 mb-4 tweet' id='tweet-" + tweet.id
     + "'><p>" + tweet.content
     + "</p><div class='btn-group'>" + LikeBtn(tweet) 
     + "</div></div>"
