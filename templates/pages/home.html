@@ -7,7 +7,15 @@ This is amazing
 {% block content %}
 Welcome to Pop
 
+
+<div id='tweets'>
+    To be replaced
+</div>
+
 <script>
+const tweetsElement = document.getElementById("tweets")
+tweetsElement,innerHTML = 'Loading...'
+
 const xhr = new XMLHttpRequest()
 const method = 'GET'
 const url = '/tweets'
