@@ -14,6 +14,7 @@ def home_view(request, *args, **kwargs):
 
 def tweet_create_view(request, *args, **kwargs):
     form = TweetForm(request.POST or None)
+    print("post data is =", request.POST)
     if form.is_valid():
         obj = form.save(commit=False)
         obj.save()
