@@ -9,12 +9,12 @@ Welcome to Pop
 
 
 <div id='tweets'>
-    To be replaced
+    Loading..
 </div>
 
 <script>
 const tweetsElement = document.getElementById("tweets")
-tweetsElement,innerHTML = 'Loading...'
+
 
 const xhr = new XMLHttpRequest()
 const method = 'GET'
@@ -26,8 +26,17 @@ xhr.open(method, url)
 xhr.onload = function(){
     // console.log(xhr.response)
     const serverResponse = xhr.response
-    var listedItems = serverResponse.response
-    console.log(listedItems)
+    var listedItems = serverResponse.response //this is an array
+    var finalTweetStr =""
+    var i;
+    for (i=0 ; i < listedItems.length ; i++){
+        console.log(i)
+        console.log(listedItems[i])
+        var currentItem = "<div class='mb-4'><h1>" + listedItems[i].id + "</h1>" + "<p>" + listedItems[i].content + "</p></div>"
+        finalTweetStr += currentItem
+    }
+    // console.log(listedItems)
+    tweetsElement.innerHTML = finalTweetStr
 }
 xhr.send()
 
