@@ -15,7 +15,7 @@ This is amazing
     <div class='col-md-4 mx-auto col-10'>
         <form class='form' id='tweet-create-form' method='POST' action='/create-tweet'> {% csrf_token %}
             <input type='hidden' value='/' name='next' />
-            <textarea class='form-control' name='content' placeholder='Whats on your mind...'></textarea>
+            <textarea class='form-control' name='content' placeholder='Whats on your mind...' required='required'></textarea>
             <button type='submit' class='btn btn-primary'>Tweet</button>
     </div>
 </div>
