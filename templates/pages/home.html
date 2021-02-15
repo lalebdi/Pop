@@ -51,13 +51,16 @@ function handleTweetCreateFormDidSubmit(event){
         // console.log(newTweet)
         // console.log(newTweet.likes) // undefined 😡
         const newTweetJson = xhr.response
-        console.log(newTweetJson.likes)
+        // console.log(newTweetJson.likes)
         // console.log(serverResponse) // -> its getting the httpRedirect. When JavaScript is running the function, JavaScript is sending it to Django and is waiting for a response. The ersponse is a new page and loadin that new page. 
         // console.log(xhr.status, serverResponse) 
         // const tweetsEl = document.getElementById("tweets")
         // loadTweets(tweetsEl)
         const newTweetElement = formatTweetElement(newTweetJson)
-        console.log(newTweetElement)
+        // console.log(newTweetElement)
+        const ogHTML = tweetsContainerElement.innerHTML
+        tweetsContainerElement.innerHTML = newTweetElement + ogHTML
+        myForm.reset()
         }
     }
     xhr.send(myFormData)
