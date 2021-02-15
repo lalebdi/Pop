@@ -28,7 +28,26 @@ This is amazing
 
 function handleTweetCreateFormDidSubmit(event){
     event.preventDefault()
-
+    // console.log(event)
+    const myForm = event.target // this way I can use the function in the future
+    const myFormData = new FormData(myForm) // this is a built in class related to Form. This is used so I can add imaging and dynamic uploading
+    // for (var myItem of myFormData.entries()){
+    //    console.log(myItem) // -> key value pairs related to everything in the input
+    // }
+    // console.log(myForm) // -> find where the data is sent -> a HTML tag with the action attribute
+    // console.log(myForm.getAttribute("action")) // -> This will give me where the action is going -> its going to create-tweet
+    const url = myForm.getAttribute("action")
+    const method = myForm.getAttribute("method")
+    // console.log(url, method)
+    const xhr = new XMLHttpRequest() // <- this is to retrieve data from a URL without refreshing (auto-updating)
+    xhr.open(method, url)
+    xhr.onload = function(){
+        const serverResponse = xhr.response
+        // console.log(serverResponse) // -> its getting the httpRedirect. When JavaScript is running the function, JavaScript is sending it to Django and is waiting for a response. The ersponse is a new page and loadin that new page. 
+        const tweetsEl = document.getElementById("tweets")
+        loadTweets(tweetsEl)
+    }
+    xhr.send(myFormData)
 }
 
 const tweetCreateForm = document.getElementById("tweet-create-form")
