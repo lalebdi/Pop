@@ -26,7 +26,7 @@ SECRET_KEY = 'j-m-$vthn=&0o@h4b65cgqj629m_9sa=sa(+)q%)x*m1#_d&%-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1'] # insert the doamin here -> .mydomain.com
 
 
 # Application definition
