@@ -13,7 +13,7 @@ This is amazing
 
 <div class='row mb-3'>
     <div class='col-md-4 mx-auto col-10'>
-        <form class='form' method='POST' action='/create-tweet'> {% csrf_token %}
+        <form class='form' id='tweet-create-form' method='POST' action='/create-tweet'> {% csrf_token %}
             <input type='hidden' value='/' name='next' />
             <textarea class='form-control' name='content' placeholder='Whats on your mind...'></textarea>
             <button type='submit' class='btn btn-primary'>Tweet</button>
@@ -25,6 +25,16 @@ This is amazing
 </div>
 
 <script>
+
+function handleTweetCreateFormDidSubmit(event){
+    event.preventDefault()
+
+}
+
+const tweetCreateForm = document.getElementById("tweet-create-form")
+
+tweetCreateForm.addEventListener("submit", handleTweetCreateFormDidSubmit)
+
 const tweetsEl = document.getElementById("tweets")
 
 function loadTweets(tweetsElement){
