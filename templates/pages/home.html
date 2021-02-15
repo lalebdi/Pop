@@ -41,6 +41,8 @@ function handleTweetCreateFormDidSubmit(event){
     // console.log(url, method)
     const xhr = new XMLHttpRequest() // <- this is to retrieve data from a URL without refreshing (auto-updating)
     xhr.open(method, url)
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest") // from Django Documentation
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest") // from Django Documentation
     xhr.onload = function(){
         const serverResponse = xhr.response
         // console.log(serverResponse) // -> its getting the httpRedirect. When JavaScript is running the function, JavaScript is sending it to Django and is waiting for a response. The ersponse is a new page and loadin that new page. 
