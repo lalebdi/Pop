@@ -40,14 +40,25 @@ function handleTweetCreateFormDidSubmit(event){
     const method = myForm.getAttribute("method")
     // console.log(url, method)
     const xhr = new XMLHttpRequest() // <- this is to retrieve data from a URL without refreshing (auto-updating)
+    const responseType = "json"
+    xhr.responseType = responseType
     xhr.open(method, url)
     xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest") // from Django Documentation
     xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest") // from Django Documentation
     xhr.onload = function(){
-        const serverResponse = xhr.response
+        if (xhr.status === 201){
+        const newTweet = xhr.response
+        // console.log(newTweet)
+        // console.log(newTweet.likes) // undefined 😡
+        const newTweetJson = xhr.response
+        console.log(newTweetJson.likes)
         // console.log(serverResponse) // -> its getting the httpRedirect. When JavaScript is running the function, JavaScript is sending it to Django and is waiting for a response. The ersponse is a new page and loadin that new page. 
-        const tweetsEl = document.getElementById("tweets")
-        loadTweets(tweetsEl)
+        // console.log(xhr.status, serverResponse) 
+        // const tweetsEl = document.getElementById("tweets")
+        // loadTweets(tweetsEl)
+        const newTweetElement = formatTweetElement(newTweetJson)
+        console.log(newTweetElement)
+        }
     }
     xhr.send(myFormData)
 }
@@ -56,7 +67,7 @@ const tweetCreateForm = document.getElementById("tweet-create-form")
 
 tweetCreateForm.addEventListener("submit", handleTweetCreateFormDidSubmit)
 
-const tweetsEl = document.getElementById("tweets")
+const tweetsContainerElement = document.getElementById("tweets")
 
 function loadTweets(tweetsElement){
     const xhr = new XMLHttpRequest()
@@ -86,7 +97,7 @@ xhr.send()
 
 }
 
-loadTweets(tweetsEl)
+loadTweets(tweetsContainerElement)
 
 function handleDidLike(tweet_id, currentCount){
     console.log(tweet_id, currentCount)
