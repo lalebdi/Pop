@@ -1,17 +1,19 @@
+from datetime import date
 import random
 from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse, response
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
+from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from tweets.serializers import TweetSerializer
 from pop.settings import ALLOWED_HOSTS
 from .forms import TweetForm
 from .models import Tweet
-from .serializers import TweetSerializer
+from .serializers import TweetSerializer, TweetActionSerializer
 
 # Create your views here.
 
@@ -42,7 +44,6 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     return Response(serializer.data, status=200)
 
 
-
 @api_view(['DELETE', 'POST'])
 @permission_classes([IsAuthenticated]) # if authenticated, they have access to this
 def tweet_delete_view(request, tweet_id, *args, **kwargs):
@@ -54,6 +55,28 @@ def tweet_delete_view(request, tweet_id, *args, **kwargs):
         return Response({"message": "You cannot delete this tweet"}, status=401)
     obj = qs.first()
     obj.delete()
+    return Response({"message": "Tweet removed"}, status=200)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated]) # if authenticated, they have access to this
+def tweet_action_view(request, *args, **kwargs):
+    ''' The actions are: like, unlike, and retweet. ID is required'''
+    serializer = TweetActionSerializer(request.POST)
+    if serializer.is_valid(raise_exception=True):
+        date = serializer.validated_data
+        tweet_id = date.get("id")
+        action = date.get("action")
+        qs = Tweet.objects.filter(id=tweet_id)
+        if not qs.exists():
+            return Response({}, status=404)
+        obj = qs.first()
+        if action == "like":
+            obj.likes.add(request.user)
+        elif action == "unlike":
+            obj.likes.remove(request.user)
+        elif action == "retweet":
+            pass # need to figure this out!!
     return Response({"message": "Tweet removed"}, status=200)
 
 
