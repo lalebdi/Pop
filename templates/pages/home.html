@@ -92,7 +92,10 @@ function handleTweetCreateFormDidSubmit(event){
             }
             // console.log(contentError)
         } else if(xhr.status === 401){
-            alert("You must log-in to tweet!")
+            alert("You must login to tweet!")
+            window.location.href = "/login"
+        } else if(xhr.status === 403){
+            alert("You must login to tweet!")
             window.location.href = "/login"
         } else if(xhr.status === 500){
             alert("Server Error")
