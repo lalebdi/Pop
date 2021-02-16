@@ -3,7 +3,9 @@ from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse, response
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
-from rest_framework.decorators import api_view
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from tweets.serializers import TweetSerializer
 from pop.settings import ALLOWED_HOSTS
@@ -20,6 +22,8 @@ def home_view(request, *args, **kwargs):
 
 
 @api_view(['POST']) # That means the method the client sends == POST
+# @authentication_classes([SessionAuthentication])
+@permission_classes([IsAuthenticated]) # if authenticated, they have access to this
 def tweet_create_view(request, *args, **kwargs): # <- REST Framework handling this
     serializer = TweetSerializer(data=request.POST)
     if serializer.is_valid(raise_exception=True):
