@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1'] # insert the doamin here -> .mydomain.com
 
+LOGIN_URL = "/login" # from the django documentation
+
 
 # Application definition
 
