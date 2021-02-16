@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # THird party
+    'rest_framwork',
+    # Internal apps
     'tweets',
 ]
 
