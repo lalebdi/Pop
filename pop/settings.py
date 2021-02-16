@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['127.0.0.1'] # insert the doamin here -> .mydomain.com
 
 LOGIN_URL = "/login" # from the django documentation
 
+MAX_TWEET_LENGTH = 240
 
 # Application definition
 
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # THird party
-    'rest_framwork',
+    'rest_framework',
     # Internal apps
     'tweets',
 ]
