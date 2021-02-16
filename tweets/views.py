@@ -16,6 +16,12 @@ def home_view(request, *args, **kwargs):
 
 
 def tweet_create_view(request, *args, **kwargs):
+    user = request.user
+    if not request.user.is_authenticated:
+        user = None
+        if request.is_ajax():
+            return JsonResponse({}, status=401)
+        return redirect(settings.LOGIN_URL)
     # print("AJAX",request.is_ajax()) # its false because I didn't add the header
     form = TweetForm(request.POST or None)
     # print("post data is =", request.POST)
@@ -23,6 +29,7 @@ def tweet_create_view(request, *args, **kwargs):
     # print("next url = ", next_url)
     if form.is_valid():
         obj = form.save(commit=False)
+        obj.user = user
         obj.save()
         if request.is_ajax():
             return JsonResponse(obj.serialize(), status=201) # 201 is for created items
