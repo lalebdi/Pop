@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = "==2.2"
+djangorestframework = "*"
 
 [dev-packages]
 
