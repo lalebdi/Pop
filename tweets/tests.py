@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .models import Tweet
 
 # Create your tests here.
+# to run a test your method should start with "test_"
 
 User = get_user_model()
 
@@ -13,4 +14,10 @@ class TweetTestCase(TestCase):
 
     def test_user_created(self):
         # user = User.objects.get(username='efg')
-        self.assertEqual(self.user.username, "efg")
+        self.assertEqual(self.user.username, "efg") # assert Equal comes inhereted from TestCase
+        # self.assertEqual(1, 2)
+
+    def test_tweet_created(self):
+        tweet_obj = Tweet.objects.create(content="test tweet", user=self.user)
+        self.assertEqual(tweet_obj.id, 1)
+        self.assertEqual(tweet_obj.user, self.user)
