@@ -40,13 +40,17 @@ class TweetCreateSerializer(serializers.ModelSerializer): # <- this is for the c
 class TweetSerializer(serializers.ModelSerializer): # This is read only for the retweeting action
     likes = serializers.SerializerMethodField(read_only=True) # I just want it to be numbers
     content = serializers.SerializerMethodField(read_only=True)
+    # No need to call a serializer method again for a property in the serializers.py since it is in the object itself
     
     class Meta:
         model = Tweet
-        fields = ['id','content', 'likes']
+        fields = ['id','content', 'likes', 'is_retweet']
 
     def get_likes(self, obj):
         return obj.likes.count()
 
     def get_content(self, obj):
-        return obj.content
+        content = obj.content
+        if obj.is_retweet:
+            content = obj.parent.content
+        return content
