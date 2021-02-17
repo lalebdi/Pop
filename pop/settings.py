@@ -26,7 +26,7 @@ SECRET_KEY = 'j-m-$vthn=&0o@h4b65cgqj629m_9sa=sa(+)q%)x*m1#_d&%-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1'] # insert the doamin here -> .mydomain.com
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] # insert the doamin here -> .mydomain.com
 
 LOGIN_URL = "/login" # from the django documentation
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # THird party
     'rest_framework',
+    'corsheaders',
     # Internal apps
     'tweets',
 ]
@@ -51,11 +52,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'pop.urls'
@@ -128,6 +131,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+CORS_ALLOW_ALL_ORIGINS = True #any website has access to my api. In the future you may use CORS_ORIGIN_WHITELIST ->https://pypi.org/project/django-cors-headers/
+CORS_URLS_REGEX = r'^/api/.*$'
 
 DEFAULT_RENDERER_CLASSES = [
         'rest_framework.renderers.JSONRenderer',
