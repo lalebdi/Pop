@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import Tweet
+from rest_framework.test import APIClient
 
 # Create your tests here.
 # to run a test your method should start with "test_"
@@ -21,3 +22,7 @@ class TweetTestCase(TestCase):
         tweet_obj = Tweet.objects.create(content="test tweet", user=self.user)
         self.assertEqual(tweet_obj.id, 1)
         self.assertEqual(tweet_obj.user, self.user)
+
+    def test_api_login(self):
+        client = APIClient()
+        client.login(username=self.user.username, password='somepassword')
