@@ -62,7 +62,8 @@ def tweet_delete_view(request, tweet_id, *args, **kwargs):
 @permission_classes([IsAuthenticated]) # if authenticated, they have access to this
 def tweet_action_view(request, *args, **kwargs):
     ''' The actions are: like, unlike, and retweet. ID is required'''
-    serializer = TweetActionSerializer(data=request.POST)
+    # print(request.POST, request.data)
+    serializer = TweetActionSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         date = serializer.validated_data
         tweet_id = date.get("id")
@@ -73,11 +74,13 @@ def tweet_action_view(request, *args, **kwargs):
         obj = qs.first()
         if action == "like":
             obj.likes.add(request.user)
+            serializer = TweetSerializer(obj)
+            return Response(serializer.data, status=200)
         elif action == "unlike":
             obj.likes.remove(request.user)
         elif action == "retweet":
             pass # need to figure this out!!
-    return Response({"message": "Tweet removed"}, status=200)
+    return Response({"message": "Action Happened"}, status=200)
 
 
 @api_view(['GET'])
