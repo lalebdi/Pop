@@ -27,7 +27,13 @@ class Tweet(models.Model):
     class Meta:
         ordering = ['-id'] # reverses the order
 
+    @property
+    def is_retweet(self):
+        ''' if the parent is not a None then it is a retweet '''
+        return self.parent != None
+    
     def serialize(self):
+        ''' Not needed anymore because of the new class at the serilaizers '''
         return {
             "id": self.id,
             "content": self.content,
