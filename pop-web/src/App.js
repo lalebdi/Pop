@@ -64,9 +64,7 @@ function App() {
             return <Tweet tweet={item} key={`${index}-{item.id}`} className='my-5 py-5 border bg-white text-dark'/>
           })}
         </div>
-        <a>
 
-        </a>
       </header>
     </div>
   );
