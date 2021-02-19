@@ -65,9 +65,6 @@ function App() {
           })}
         </div>
         <a
-          
-
-
 
         >
           Learn React
