@@ -65,7 +65,7 @@ function App() {
           })}
         </div>
         <a>
-          Learn React
+
         </a>
       </header>
     </div>
