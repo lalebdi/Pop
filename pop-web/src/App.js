@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { Tweet } from './tweets'
 
 function loadTweets(callback){
   const xhr = new XMLHttpRequest()
