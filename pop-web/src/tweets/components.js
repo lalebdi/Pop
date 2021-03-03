@@ -25,17 +25,21 @@ export function TweetList(props){
 export function ActionBtn(props){
     const {tweet, action} = props
     const className = props.className ? props.className : 'btn btn-primary btn-sm'
-    return action.type === 'like' ? <button className={className}> { tweet.likes } Likes </button> : null
+    const actionDisplay = action.display ? action.display : 'Action'
+    const display = action.type === 'like' ? `${ tweet.likes } ${actionDisplay}` : actionDisplay
+    
+    return <button className={className}> {display} </button>
 }
 
 export function Tweet(props){
     const {tweet} = props
     const className = props.className ? props.className : 'col-10 mx-auto col-md-6'
-    const action = {type: "like"}
     return <div className={className}>
-            <p>{tweet.content}</p>
+            <p>{tweet.id} - {tweet.content}</p>
             <div className='btn btn-group'>
-                <ActionBtn tweet={tweet} action={action}/>
+                <ActionBtn tweet={tweet} action={{type: "like", display:"Likes"}}/>
+                <ActionBtn tweet={tweet} action={{type: "unlike", display:"Unlike" }}/>
+                <ActionBtn tweet={tweet} action={{type: "retweet", display:"Retweet" }}/>
             </div>
     </div>
 }
