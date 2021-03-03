@@ -21,8 +21,8 @@ function loadTweets(callback){
 
   }
 
-function App() {
-  const [ tweets, setTweets ] = useState([])
+  function TweetList(props){
+    const [ tweets, setTweets ] = useState([])
 
   useEffect(() => {
     const myCallback = (response, status) =>{
@@ -34,6 +34,14 @@ function App() {
     loadTweets(myCallback)
   }, [])
 
+  return tweets.map((item, index)=>{
+    return <Tweet tweet={item} key={`${index}-{item.id}`} className='my-5 py-5 border bg-white text-dark'/>
+  })
+  }
+
+function App() {
+  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -41,9 +49,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <div>
-          {tweets.map((item, index)=>{
-            return <Tweet tweet={item} key={`${index}-{item.id}`} className='my-5 py-5 border bg-white text-dark'/>
-          })}
+          <TweetList />
         </div>
       </header>
     </div>
