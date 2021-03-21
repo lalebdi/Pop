@@ -34,7 +34,7 @@ export function TweetsComponent(props){
 }
     
 export function TweetList(props){
-        const [ tweetsInit, setTweetsInit ] = useState(props.newTweets ? props.newTweets : [])
+        const [ tweetsInit, setTweetsInit ] = useState([])
         const [ tweets, setTweets ] = useState([])
         // console.log(props.newTweets)
         useEffect(() =>{
