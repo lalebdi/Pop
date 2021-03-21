@@ -130,6 +130,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# Below is where to store static files locally
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
 CORS_ALLOW_ALL_ORIGINS = True #any website has access to my api. In the future you may use CORS_ORIGIN_WHITELIST ->https://pypi.org/project/django-cors-headers/
 CORS_URLS_REGEX = r'^/api/.*$'
