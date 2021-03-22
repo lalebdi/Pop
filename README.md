@@ -134,8 +134,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
+Website - [https://www.leahwebdev.com](https://www.leahwebdev.com)
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/lalebdi/Pop](https://github.com/lalebdi/Pop)
 
 
