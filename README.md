@@ -62,9 +62,9 @@ Here's a blank template to get started:
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Django 2.2](https://www.djangoproject.com)
+* [React](https://reactjs.org)
+* [BootStrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
 
 
 
