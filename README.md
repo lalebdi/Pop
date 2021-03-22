@@ -93,7 +93,7 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone https://github.com/lalebdi/Pop.git
    ```
-2. Install NPM packages
+2. Install node packages
    ```sh
    yarn install
    ```
