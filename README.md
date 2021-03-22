@@ -80,11 +80,11 @@ This is an example of how to list things you need to use the software and how to
   ```
 * Python
   ```sh
-  npm install npm@latest -g
+  https://www.python.org
   ```
 * pipenv
   ```sh
-  npm install npm@latest -g
+  pip install pipenv
   ```
 
 ### Installation
