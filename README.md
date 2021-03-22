@@ -55,9 +55,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
+This is a microblogging app I am currently working on with a plan to deploy this using a Raspberry Pi from my home. Features include poting, liking, unliking and retweeting. Future features include local news and build a iOS and and Android apps. Looking forward to add more features.
 
 
 ### Built With
