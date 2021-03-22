@@ -89,7 +89,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 2. Install NPM packages
    ```sh
-   npm install
+   yarn install
    ```
 
 
