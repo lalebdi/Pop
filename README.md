@@ -54,7 +54,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-This is a microblogging app I am currently working on with a plan to deploy this using a Raspberry Pi from my home. Features include poting, liking, unliking and retweeting. Future features include local news and build a iOS and and Android apps. Looking forward to add more features.
+This is a microblogging app I am currently working on with a plan to deploy this using a Raspberry Pi from my home. Features include posting, liking, unliking and retweeting. Future features include local news and build a iOS and and Android apps. Looking forward to add more features.
 
 
 ### Built With
