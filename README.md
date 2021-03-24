@@ -104,6 +104,11 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    ./manage.py runserver
    ```
+5. Run the React in development mode
+   ```sh
+   cd pop-web
+   yarn start
+   ```
 
 
 
