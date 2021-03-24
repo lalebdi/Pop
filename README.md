@@ -100,6 +100,10 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    pipenv shell
    ```
+4. Run the server
+   ```sh
+   ./manage.py runserver
+   ```
 
 
 
