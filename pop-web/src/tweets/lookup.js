@@ -1,10 +1,13 @@
+import { backendLookup } from '../lookup';
+
+
 export function createTweet(newTweet, callback){
-    lookup("POST", "/tweets/create/", callback, {content: newTweet})
+    backendLookup("POST", "/tweets/create/", callback, {content: newTweet})
 }
 
 export function loadTweets(callback){
 
-    lookup("GET", "/tweets/", callback)
+    backendLookup("GET", "/tweets/", callback)
     // const xhr = new XMLHttpRequest()
     // const method = 'GET'
     // const url = 'http://127.0.0.1:8000/api/tweets/'
