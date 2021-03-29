@@ -42,6 +42,7 @@ function lookup(method, endpoint, callback, data){
     console.log(e)
     callback({"message": "The request encoutered an error"}, 400)
     }
+    console.log(jsonData)
     xhr.send(jsonData)
 }
 
