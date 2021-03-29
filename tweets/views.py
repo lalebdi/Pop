@@ -27,7 +27,9 @@ def home_view(request, *args, **kwargs):
 # @authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated]) # if authenticated, they have access to this
 def tweet_create_view(request, *args, **kwargs): # <- REST Framework handling this
-    serializer = TweetCreateSerializer(data=request.POST)
+    # print(request.POST)
+    # print(request.data)
+    serializer = TweetCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
