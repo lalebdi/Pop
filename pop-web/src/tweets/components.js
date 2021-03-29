@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createTweet, loadTweets } from '../lookup'
+import { createTweet, loadTweets } from './lookup'
 
 export function TweetsComponent(props){
     const textAreaRef = React.createRef()
