@@ -1,11 +1,11 @@
 import { backendLookup } from '../lookup';
 
 
-export function createTweet(newTweet, callback){
+export function apiTweetCreate(newTweet, callback){
     backendLookup("POST", "/tweets/create/", callback, {content: newTweet})
 }
 
-export function loadTweets(callback){
+export function apiTweetList(callback){
 
     backendLookup("GET", "/tweets/", callback)
     // const xhr = new XMLHttpRequest()
