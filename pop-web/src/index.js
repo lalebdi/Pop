@@ -15,13 +15,14 @@ if(appEl){
   appEl
   );
 }
+const e = React.createElement;
 const tweetsEl = document.getElementById('pop')
 if(tweetsEl){
+  // console.log(tweetsEl.dataset)
   ReactDOM.render(
-    <React.StrictMode>
-    <TweetsComponent />
-  </React.StrictMode>,
-  tweetsEl
+    // <React.StrictMode>
+    e(TweetsComponent, tweetsEl.dataset),tweetsEl
+    // </React.StrictMode>
   );
 }
 
