@@ -65,6 +65,27 @@ This is a microblogging app I am currently working on with a plan to deploy this
 * [BootStrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
 
 
+<!-- GETTING STARTED -->
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* yarn
+  ```sh
+  npm install --global yarn
+  ```
+* Python
+  ```sh
+  https://www.python.org
+  ```
+* pipenv
+  ```sh
+  pip install pipenv
+  ```
+
 
 
 
