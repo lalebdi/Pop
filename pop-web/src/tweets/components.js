@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { apiTweetCreate, apiTweetAction, apiTweetList } from './lookup'
 
 export function TweetsComponent(props){
+    // console.log(props)
     const textAreaRef = React.createRef()
     const [ newTweets, setNewTweets ] = useState([]) 
 
