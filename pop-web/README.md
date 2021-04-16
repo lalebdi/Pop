@@ -58,6 +58,13 @@
 This is a microblogging app I am currently working on with a plan to deploy this using a Raspberry Pi from my home. Features include posting, liking, unliking and retweeting. Future features include local news and build a iOS and and Android apps. Looking forward to add more features.
 
 
+### Built With
+
+* [Django 2.2](https://www.djangoproject.com)
+* [React](https://reactjs.org)
+* [BootStrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
+
+
 
 
 
