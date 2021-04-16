@@ -87,5 +87,31 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/lalebdi/Pop.git
+   ```
+2. Install node packages
+   ```sh
+   cd pop-web
+   yarn install
+   ```
+3. Activate the environment
+   ```sh
+   pipenv shell
+   ```
+4. Run the server
+   ```sh
+   ./manage.py runserver
+   ```
+5. Run the React in development mode
+   ```sh
+   cd pop-web
+   yarn start
+   ```
+
+
 
 
