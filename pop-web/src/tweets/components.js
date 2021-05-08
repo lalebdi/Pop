@@ -3,9 +3,14 @@ import { apiTweetCreate, apiTweetAction, apiTweetList } from './lookup'
 
 export function TweetsComponent(props){
     // console.log(props)
+    // const { username } = props;
+    // const { canCreate } = props;
     const textAreaRef = React.createRef()
     const [ newTweets, setNewTweets ] = useState([]) 
 
+    const canCreate = props.canCreate === "false" ? false : true;
+    // console.log(canCreate === true)
+    // console.log(canCreate === false)
     const handleBackendUpdate = (response, status) => {
         // Backend API handler 
         // console.log(response, status)
@@ -34,7 +39,7 @@ export function TweetsComponent(props){
     }
 
     return <div className={props.className}>
-        <div className='col-12 mb-3'>
+        {canCreate === true && <div className='col-12 mb-3'>
             <form onSubmit={handleSubmit}>
                 <textarea className="form-control" name='tweet' required={true} ref={textAreaRef}>
                 
@@ -42,7 +47,8 @@ export function TweetsComponent(props){
                 <button type='submit' className='btn btn-primary my-3'>Tweet</button>
             </form>
         </div>
-        <TweetList newTweets={newTweets}/>
+        }
+        <TweetList newTweets={newTweets} {...props} /> 
     </div>
 }
     
@@ -69,9 +75,9 @@ export function TweetList(props){
                 alert("There was an error 🤦🏼‍♀️")
             }
         }
-        apiTweetList(handleTweetListLookup)
+        apiTweetList(props.username, handleTweetListLookup) // props.username must be passed as a dependecy below to fix the useEffect hook warning
     }
-        }, [tweetsInit, tweetsDidSet , setTweetsDidSet])
+        }, [tweetsInit, tweetsDidSet , setTweetsDidSet, props.username])
 
         const handleDidRetweet = (newTweet) => {
             const updateTweetsInit = [...tweetsInit]
