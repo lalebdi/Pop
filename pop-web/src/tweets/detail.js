@@ -1,6 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
-import { apiTweetCreate, apiTweetList } from './lookup'
+import React, { useState } from 'react';
 import { ActionBtn } from './buttons'
 
 
