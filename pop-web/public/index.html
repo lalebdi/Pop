@@ -30,8 +30,9 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="pop-detail" data-tweet-id="3" data-class-name="col-6 mx-auto"></div>
-    <div class="d-none" id="pop" data-username="Leah" data-can-create="false"></div>
+    <div id="tweet-container"></div>
+    <!-- <div class="d-none" id="pop" data-username="Leah" data-can-create="false"></div> -->
+    <div id="pop" data-username="Leah" data-can-create="false"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -43,4 +44,18 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+      var path = window.location.pathname
+      var idRegEx = /(?<tweetid>\d+)/
+      var match = path.match(idRegEx)
+
+      if(match){
+        var tweetId = match.groups.tweetid
+        var popEl = document.getElementById("pop")
+      popEl.className = 'd-none'
+      var tweetEl = `<div class='pop-detail' data-tweet-id=${tweetId} data-class-name='col-6 mx-auto'></div>` // this can be dynamically impeded into the body above
+      var mainContainer = document.getElementById("tweet-container")
+      mainContainer.innerHTML = tweetEl
+    }
+  </script>
 </html>
