@@ -1,19 +1,19 @@
-from datetime import date
-import random
+# from datetime import date
+# import random
 from django.conf import settings
-from django.http import HttpResponse, Http404, JsonResponse, response
+# from django.http import HttpResponse, Http404, JsonResponse, response
 from django.shortcuts import render, redirect
-from django.utils.http import is_safe_url
-from rest_framework import serializers
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from tweets.serializers import TweetSerializer
-from pop.settings import ALLOWED_HOSTS
-from .forms import TweetForm
-from .models import Tweet
-from .serializers import TweetSerializer, TweetActionSerializer, TweetCreateSerializer
+# from django.utils.http import is_safe_url
+# from rest_framework import serializers
+# from rest_framework.authentication import SessionAuthentication
+# from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
+# from rest_framework.permissions import IsAuthenticated
+# from rest_framework.response import Response
+# from tweets.serializers import TweetSerializer
+# from pop.settings import ALLOWED_HOSTS
+# from .forms import TweetForm
+# from .models import Tweet
+# from .serializers import TweetSerializer, TweetActionSerializer, TweetCreateSerializer
 
 # Create your views here.
 
@@ -26,15 +26,15 @@ def home_view(request, *args, **kwargs):
     return render(request, "pages/home.html", context={"username": username}, status=200)
 
 # The new local views need to be brought to the configuration
-def local_tweets_list_view(request, *args, **kwargs):
+def tweets_list_view(request, *args, **kwargs):
     return render(request, "tweets/list.html")
 
 
-def local_tweets_profile_view(request, username, *args, **kwargs):
+def tweets_profile_view(request, username, *args, **kwargs):
     return render(request, "tweets/profile.html", context={"profile_username" : username})
 
 
-def local_tweets_detail_view(request, tweet_id, *args, **kwargs):
+def tweets_detail_view(request, tweet_id, *args, **kwargs):
     return render(request, "tweets/detail.html", context={"tweet_id" : tweet_id})
 
 
