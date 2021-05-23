@@ -20,15 +20,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from tweets.views import local_tweets_list_view, local_tweets_profile_view, local_tweets_detail_view
+from tweets.views import tweets_list_view, tweets_profile_view, tweets_detail_view
 # from tweets.views import home_view, tweet_action_view, tweet_delete_view, tweet_list_view, tweet_detail_view, tweet_create_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', local_tweets_list_view),
-    path('<int:tweet_id>', local_tweets_detail_view),
-    path('profile/<str:username>', local_tweets_profile_view),
-    path('api/tweets/', include('tweets.urls'))
+    path('', tweets_list_view),
+    path('<int:tweet_id>', tweets_detail_view),
+    path('profile/<str:username>', tweets_profile_view),
+    path('api/tweets/', include('tweets.api.urls'))
     # path('', home_view),
     # path('react/', TemplateView.as_view(template_name='react_via_dj.html')),
     # path('create-tweet', tweet_create_view),
