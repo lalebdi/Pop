@@ -11,9 +11,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from tweets.serializers import TweetSerializer
 from pop.settings import ALLOWED_HOSTS
-from .forms import TweetForm
-from .models import Tweet
-from .serializers import TweetSerializer, TweetActionSerializer, TweetCreateSerializer
+from ..forms import TweetForm
+from ..models import Tweet
+from ..serializers import TweetSerializer, TweetActionSerializer, TweetCreateSerializer
 
 # Create your views here.
 
