@@ -65,6 +65,8 @@ class TweetTestCase(TestCase):
         user = self.user
         my_like_instances = user.tweetlike_set.count()
         self.assertEqual(my_like_instances, 1)
+        my_related_likes = user.tweet_user.count()
+        self.assertEqual(my_like_instances, my_related_likes)
 
 
     def test_action_unlike(self):
