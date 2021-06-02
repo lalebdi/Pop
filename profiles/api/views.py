@@ -24,7 +24,7 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
     other = other_user_qs.first()
     profile = other.profile
     data = {}
-    try:
+    try: # can use (data = request.data or {}) instead
         data = request.data
     except:
         pass
@@ -37,7 +37,7 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
     else:
         pass
     current_followers_qs = profile.followers.all()
-    return Response({"count": current_followers_qs.count()}, status=400)
+    return Response({"count": current_followers_qs.count()}, status=200)
 
 
 
