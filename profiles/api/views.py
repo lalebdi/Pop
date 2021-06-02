@@ -52,20 +52,6 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
 
 
 
-def tweet_list_view_pure_django(request, *args, **kwargs):
-    """
-    REST API VIEW
-    Consumed by JavaScript or Swift
-    return json data
-    """
-    qs = Tweet.objects.all()
-    tweets_list = [x.serialize() for x in qs] # replaced the dict with the method from the model
-    data = {
-        "isUser": False,
-        "response": tweets_list
-    }
-    return JsonResponse(data)
-
 
 def tweet_detail_view_pure_django(request, tweet_id, *args, **kwargs):
     """
