@@ -1,15 +1,9 @@
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse, Http404, JsonResponse, response
-from django.shortcuts import render, redirect
-from django.utils.http import is_safe_url
-from rest_framework import serializers
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from tweets.serializers import TweetSerializer
 from pop.settings import ALLOWED_HOSTS
 from ..models import Profile
 
@@ -34,7 +28,7 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
         data = request.data
     except:
         pass
-    print(data)
+    # print(data)
     action = data.get("action")
     if action == "follow":
         profile.follwers.add(me)
