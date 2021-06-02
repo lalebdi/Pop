@@ -49,15 +49,6 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
 
 
 
-@api_view(['GET'])
-def tweet_list_view(request, *args, **kwargs):
-    qs = Tweet.objects.all()
-    username = request.GET.get('username') # the url is going to pass a parameter (username) ?username=Leah
-    if username != None:
-        qs = qs.filter(user__username__iexact=username) # will still lookup the user even if with a different case(lower or upper)
-    serializer = TweetSerializer(qs, many=True)
-    return Response(serializer.data)
-
 
 def tweet_create_view_pure_django(request, *args, **kwargs):
     user = request.user
