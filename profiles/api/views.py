@@ -51,25 +51,3 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
 
 
 
-
-
-def tweet_detail_view_pure_django(request, tweet_id, *args, **kwargs):
-    """
-    REST API VIEW
-    Consumed by JavaScript or Swift
-    return json data
-    """
-    data = {
-        "id": tweet_id,
-        # "content": obj.content,
-        # "image_path": obj.image.url
-    }
-    status = 200
-    try:
-        obj = Tweet.objects.get(id=tweet_id)
-        data['content'] = obj.content
-    except:
-        data['message'] = "Not found"
-        status = 404
-
-    return JsonResponse(data, status=status)  # json.dumps with a content type ='application/json'
