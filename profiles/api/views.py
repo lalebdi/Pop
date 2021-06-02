@@ -48,36 +48,6 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
 
 
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated]) # if authenticated, they have access to this
-def tweet_action_view(request, *args, **kwargs):
-    ''' The actions are: like, unlike, and retweet. ID is required'''
-    # print(request.POST, request.data)
-    serializer = TweetActionSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        data = serializer.validated_data
-        tweet_id = data.get("id")
-        action = data.get("action")
-        content = data.get("content")
-        qs = Tweet.objects.filter(id=tweet_id)
-        if not qs.exists():
-            return Response({}, status=404)
-        obj = qs.first()
-        if action == "like":
-            obj.likes.add(request.user)
-            serializer = TweetSerializer(obj)
-            return Response(serializer.data, status=200)
-        elif action == "unlike":
-            obj.likes.remove(request.user)
-            serializer = TweetSerializer(obj)
-            return Response(serializer.data, status=200)
-        elif action == "retweet":
-            parent_obj = obj
-            new_tweet = Tweet.objects.create(user=request.user, parent=parent_obj, content=content)
-            serializer = TweetSerializer(new_tweet)
-            return Response(serializer.data, status=201)
-    return Response({"message": "Action Happened"}, status=200)
-
 
 @api_view(['GET'])
 def tweet_list_view(request, *args, **kwargs):
