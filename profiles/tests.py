@@ -2,6 +2,8 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from .models import Profile
 
+from rest_framework.test import APIClient
+
 # Create your tests here.
 
 
@@ -12,7 +14,13 @@ class ProfileTestCase(TestCase):
         self.user = User.objects.create_user(username='efg', password='somepassword')
         self.userB = User.objects.create_user(username='abc', password='somepassword2')
 
+
+    def get_client(self):
+        client = APIClient()
+        client.login(username=self.user.username, password='somepassword')
+        return client
     
+
     def test_profile_created(self):
         qs = Profile.objects.all()
         self.assertEqual(qs.count(), 2)
@@ -27,3 +35,13 @@ class ProfileTestCase(TestCase):
         self.assertTrue(qs.exists())
         first_user_following_none = first.following.all()
         self.assertFalse(first_user_following_none.exists())
+
+    
+        def test_follow_api_endpoint(self):
+            client = self.get_client()
+            response = client.post(f"/api/profiles/{self.userB.username}/follow",
+                {"action": "follow"}
+            )
+            r_data = response.json()
+            count = r_data.get("count")
+            self.assertEqual(count, 1) 
