@@ -58,3 +58,13 @@ class ProfileTestCase(TestCase):
         r_data = response.json()
         count = r_data.get("count")
         self.assertEqual(count, 0) 
+
+
+    def test_cannot_follow_api_endpoint(self):
+        client = self.get_client()
+        response = client.post(f"/api/profiles/{self.user.username}/follow",
+                {"action": "follow"}
+            )
+        r_data = response.json()
+        count = r_data.get("count")
+        self.assertEqual(count, 0) 
