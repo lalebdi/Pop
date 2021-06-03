@@ -37,11 +37,24 @@ class ProfileTestCase(TestCase):
         self.assertFalse(first_user_following_none.exists())
 
     
-        def test_follow_api_endpoint(self):
-            client = self.get_client()
-            response = client.post(f"/api/profiles/{self.userB.username}/follow",
+    def test_follow_api_endpoint(self):
+        client = self.get_client()
+        response = client.post(f"/api/profiles/{self.userB.username}/follow",
                 {"action": "follow"}
             )
-            r_data = response.json()
-            count = r_data.get("count")
-            self.assertEqual(count, 1) 
+        r_data = response.json()
+        count = r_data.get("count")
+        self.assertEqual(count, 1) 
+
+    
+    def test_unfollow_api_endpoint(self):
+        first = self.user
+        second = self.userB
+        first.profile.followers.add(second)
+        client = self.get_client()
+        response = client.post(f"/api/profiles/{self.userB.username}/follow",
+                {"action": "unfollow"}
+            )
+        r_data = response.json()
+        count = r_data.get("count")
+        self.assertEqual(count, 0) 
