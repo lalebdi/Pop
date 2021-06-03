@@ -31,9 +31,9 @@ def user_follow_view(request, username, *args, **kwargs): # <- REST Framework ha
     # print(data)
     action = data.get("action")
     if action == "follow":
-        profile.follwers.add(me)
+        profile.followers.add(me)
     elif action == "unfollow":
-        profile.followes.remove(me)
+        profile.followers.remove(me)
     else:
         pass
     current_followers_qs = profile.followers.all()
