@@ -4,6 +4,7 @@ from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse, response
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
+from django.db.models import Q
 from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
@@ -92,12 +93,17 @@ def tweet_action_view(request, *args, **kwargs):
 @permission_classes([IsAuthenticated]) # if authenticated, they have access to this
 def tweet_feed_view(request, *args, **kwargs):
     user = request.user
-    profiles = user.following.all()
-    followed_users_id = []
-    if profiles.exists():
-        followed_users_id = [x.user.id for x in profiles]
-    followed_users_id.append(user.id)
-    qs = Tweet.objects.filter(user__id__in=followed_users_id).order_by("-timestamp") # the "-" will give us the newest first. removing it will result in oldest first
+    # profiles_exist = user.following.exists()
+    # # profiles = user.following.all()
+    # followed_users_id = []
+    # if profiles_exist:
+    #     followed_users_id = user.following.values_list("user__id", flat=True)  #[x.user.id for x in profiles]
+    # # followed_users_id.append(user.id)
+    # qs = Tweet.objects.filter(
+    #     Q(user__id__in=followed_users_id) |
+    #     Q(user=user)
+    #     ).distinct().order_by("-timestamp") # the "-" will give us the newest first. removing it will result in oldest first
+    qs = Tweet.objects.feed(user)
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data, status=200)
 
