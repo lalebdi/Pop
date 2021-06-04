@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models import Q
 import random
 
 # Create your models here.
@@ -13,6 +14,27 @@ class TweetLike(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
+class TweetQuerySet(models.QuerySet):
+    def feed(self, user):
+        profiles_exist = user.following.exists()
+        followed_users_id = []
+        if profiles_exist:
+            followed_users_id = user.following.values_list("user__id", flat=True)  #[x.user.id for x in profiles]
+        return self.filter( # self replaces the tweet.object
+            Q(user__id__in=followed_users_id) |
+            Q(user=user)
+            ).distinct().order_by("-timestamp") 
+
+
+class TweetManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return TweetQuerySet(self.model, using=self._db)
+    
+
+    def feed(self, user):
+        return self.get_queryset().feed(user)
+
+
 class Tweet(models.Model):
     parent = models.ForeignKey("self", null=True, on_delete=models.SET_NULL) # the self is to refrence the model itself
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="tweets") # this is so many users can have many tweets. CASCADE will remove all the user's tweets. If I want to keep a history change the params to null=Truem and on_delete=models.SET_NULL
@@ -20,6 +42,8 @@ class Tweet(models.Model):
     content = models.TextField(blank=True, null=True)
     image = models.FileField(upload_to='images/', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    objects = TweetManager()
 
     # def __str__(self): # this will show the contents in the admin page instead of the id
     #     return self.content
