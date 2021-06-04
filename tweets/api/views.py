@@ -4,7 +4,7 @@ from django.conf import settings
 from django.http import HttpResponse, Http404, JsonResponse, response
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
-from django.db.models import Q
+# from django.db.models import Q
 from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
