@@ -1,6 +1,7 @@
 from datetime import date
 import random
 from django.conf import settings
+from django.core import paginator
 from django.http import HttpResponse, Http404, JsonResponse, response
 from django.shortcuts import render, redirect
 from django.utils.http import is_safe_url
@@ -10,6 +11,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action, api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from tweets.serializers import TweetSerializer
 from pop.settings import ALLOWED_HOSTS
 from ..forms import TweetForm
@@ -89,9 +91,18 @@ def tweet_action_view(request, *args, **kwargs):
     return Response({"message": "Action Happened"}, status=200)
 
 
+def get_paginated_queryset_response(qs, request):
+    paginator = PageNumberPagination()
+    paginator.page_size = 20
+    paginated_qs = paginator.paginate_queryset(qs, request)
+    serializer = TweetSerializer(paginated_qs, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) # if authenticated, they have access to this
 def tweet_feed_view(request, *args, **kwargs):
+    paginator = PageNumberPagination()
+    paginator.page_size = 20
     user = request.user
     # profiles_exist = user.following.exists()
     # # profiles = user.following.all()
@@ -104,8 +115,9 @@ def tweet_feed_view(request, *args, **kwargs):
     #     Q(user=user)
     #     ).distinct().order_by("-timestamp") # the "-" will give us the newest first. removing it will result in oldest first
     qs = Tweet.objects.feed(user)
-    serializer = TweetSerializer(qs, many=True)
-    return Response(serializer.data, status=200)
+    paginated_qs = paginator.paginate_queryset(qs, request)
+    serializer = TweetSerializer(paginated_qs, many=True)
+    return paginator.get_paginated_response(serializer.data)  #Response(serializer.data, status=200)
 
 
 @api_view(['GET'])
