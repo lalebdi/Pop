@@ -89,13 +89,24 @@ def tweet_action_view(request, *args, **kwargs):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated]) # if authenticated, they have access to this
+def tweet_feed_view(request, *args, **kwargs):
+    user = request.user
+    profiles = user.following.all()
+    followed_users_id = [x.user.id for x in profiles].append(user.id)
+    qs = Tweet.objects.filter(user__id__in=followed_users_id).order_by("-timestamp") # the "-" will give us the newest first. removing it will result in oldest first
+    serializer = TweetSerializer(qs, many=True)
+    return Response(serializer.data, status=200)
+
+
+@api_view(['GET'])
 def tweet_list_view(request, *args, **kwargs):
     qs = Tweet.objects.all()
     username = request.GET.get('username') # the url is going to pass a parameter (username) ?username=Leah
     if username != None:
         qs = qs.filter(user__username__iexact=username) # will still lookup the user even if with a different case(lower or upper)
     serializer = TweetSerializer(qs, many=True)
-    return Response(serializer.data)
+    return Response(serializer.data, status=200)
 
 
 def tweet_create_view_pure_django(request, *args, **kwargs):
