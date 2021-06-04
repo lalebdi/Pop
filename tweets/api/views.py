@@ -101,8 +101,8 @@ def get_paginated_queryset_response(qs, request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) # if authenticated, they have access to this
 def tweet_feed_view(request, *args, **kwargs):
-    paginator = PageNumberPagination()
-    paginator.page_size = 20
+    # paginator = PageNumberPagination()
+    # paginator.page_size = 20
     user = request.user
     # profiles_exist = user.following.exists()
     # # profiles = user.following.all()
@@ -115,9 +115,9 @@ def tweet_feed_view(request, *args, **kwargs):
     #     Q(user=user)
     #     ).distinct().order_by("-timestamp") # the "-" will give us the newest first. removing it will result in oldest first
     qs = Tweet.objects.feed(user)
-    paginated_qs = paginator.paginate_queryset(qs, request)
-    serializer = TweetSerializer(paginated_qs, many=True)
-    return paginator.get_paginated_response(serializer.data)  #Response(serializer.data, status=200)
+    # paginated_qs = paginator.paginate_queryset(qs, request)
+    # serializer = TweetSerializer(paginated_qs, many=True)
+    return get_paginated_queryset_response(qs, request)  #Response(serializer.data, status=200)
 
 
 @api_view(['GET'])
@@ -126,8 +126,8 @@ def tweet_list_view(request, *args, **kwargs):
     username = request.GET.get('username') # the url is going to pass a parameter (username) ?username=Leah
     if username != None:
         qs = qs.by_username(username) # will still lookup the user even if with a different case(lower or upper)
-    serializer = TweetSerializer(qs, many=True)
-    return Response(serializer.data, status=200)
+    # serializer = TweetSerializer(qs, many=True)
+    return get_paginated_queryset_response(qs, request) #Response(serializer.data, status=200)
 
 
 def tweet_create_view_pure_django(request, *args, **kwargs):
