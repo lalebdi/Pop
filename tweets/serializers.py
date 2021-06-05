@@ -3,6 +3,7 @@ from pop.settings import MAX_TWEET_LENGTH
 from django.db.models import fields
 from django.conf import settings
 from rest_framework import serializers
+from profiles.serializers import PublicProfileSerializer
 from .models import Tweet
 
 MAX_TWEET_LENGTH = settings.MAX_TWEET_LENGTH
@@ -22,11 +23,12 @@ class TweetActionSerializer(serializers.Serializer): # Both fields are required
 
 
 class TweetCreateSerializer(serializers.ModelSerializer): # <- this is for the create view
+    user = PublicProfileSerializer(source="user.profile", read_only=True) #serializers.SerializerMethodField(read_only=True) 
     likes = serializers.SerializerMethodField(read_only=True) # I just want it to be numbers
     
     class Meta:
         model = Tweet
-        fields = ['id','content', 'likes']
+        fields = ['user', 'id','content', 'likes', 'timestamp']
 
     def get_likes(self, obj):
         return obj.likes.count()
@@ -37,7 +39,12 @@ class TweetCreateSerializer(serializers.ModelSerializer): # <- this is for the c
         return value
 
 
+    # def get_user(self, obj):
+    #     return obj.user.id
+
+
 class TweetSerializer(serializers.ModelSerializer): # This is read only for the retweeting action
+    user = PublicProfileSerializer(source="user.profile", read_only=True) #user = serializers.SerializerMethodField(read_only=True) 
     likes = serializers.SerializerMethodField(read_only=True) # I just want it to be numbers
     # content = serializers.SerializerMethodField(read_only=True)
     # No need to call a serializer method again for a property in the serializers.py since it is in the object itself
@@ -45,10 +52,14 @@ class TweetSerializer(serializers.ModelSerializer): # This is read only for the 
     
     class Meta:
         model = Tweet
-        fields = ['id','content', 'likes', 'is_retweet', 'parent']
+        fields = ['user', 'id','content', 'likes', 'is_retweet', 'parent', 'timestamp']
 
     def get_likes(self, obj):
         return obj.likes.count()
+
+    
+    # def get_user(self, obj):
+    #     return obj.user.id
 
     # def get_content(self, obj):
     #     content = obj.content
