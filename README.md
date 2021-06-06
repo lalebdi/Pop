@@ -127,7 +127,7 @@ This app will be deployed from a local server that I will build at home.
 
 See the [open issues](https://github.com/lalebdi/Pop/issues) for a list of proposed features (and known issues).
 Add FramerMotion to improve UX.
-See the [open issues](https://github.com/lalebdi/Pop/issues) for a list of proposed features (and known issues).
+Migrate DB to PostgreSQL.
 
 
 
