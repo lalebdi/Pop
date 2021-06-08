@@ -3,6 +3,15 @@ import React, { useState } from 'react';
 import { ActionBtn } from './buttons'
 
 
+function UserPicture(props){
+    const { user } = props
+
+    return <span className="mx-1 px-3 py-2 rounded-circle bg-dark text-white">
+    {user.username[0]}
+    </span>
+}
+
+
 export function ParentTweet(props){
     const { tweet } = props
     return tweet.parent ? <Tweet isRepost rePoster={props.rePoster} hideActions className={" "} tweet={tweet.parent} /> : null
@@ -39,9 +48,7 @@ export function Tweet(props){
         {isRepost === true && <div className="mb-2"><span className='small text-muted'>Reposted from @{rePoster.username}</span></div>}
         <div className='d-flex'>
             <div className=''>
-            <span className="mx-1 px-3 py-2 rounded-circle bg-dark text-white">
-            {tweet.user.username[0]}
-            </span>
+            <UserPicture user={tweet.user} />
             </div>
             <div className="col-11">
                 <div>
