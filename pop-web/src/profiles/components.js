@@ -1,10 +1,9 @@
 
-import React, { useState } from 'react';
-import { ActionBtn } from './buttons'
+import React from 'react';
 
 
 
-function UserLink(props){
+export function UserLink(props){
     const { username } = props
 
     const handleUserLink = (event) => {
@@ -16,7 +15,7 @@ function UserLink(props){
 }
 
 
-function UserDisplay(props){
+export function UserDisplay(props){
     const {user, inludeFullName} = props
     const nameDisplay = inludeFullName === true ? `${user.first_name} ${user.last_name} ` : null
 
@@ -27,7 +26,7 @@ function UserDisplay(props){
 }
 
 
-function UserPicture(props){
+export function UserPicture(props){
     const { user } = props
 
     return <UserLink username={user.username} >
