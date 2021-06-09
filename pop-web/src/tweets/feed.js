@@ -28,7 +28,7 @@ export function FeedList(props){
             alert("There was an error 🤦🏼‍♀️")
         }
     }
-    apiTweetFeed(props.username, handleTweetListLookup) // props.username must be passed as a dependecy below to fix the useEffect hook warning
+    apiTweetFeed( handleTweetListLookup) // props.username must be passed as a dependecy below to fix the useEffect hook warning
 }
     }, [tweetsInit, tweetsDidSet , setTweetsDidSet, props.username])
 
