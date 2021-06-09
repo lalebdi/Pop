@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { TweetsComponent, TweetDetailComponent } from './tweets';  
+import { FeedComponent, TweetsComponent, TweetDetailComponent } from './tweets';  
 import reportWebVitals from './reportWebVitals';
 
 
@@ -22,6 +22,16 @@ if(tweetsEl){
   ReactDOM.render(
     // <React.StrictMode>
     e(TweetsComponent, tweetsEl.dataset),tweetsEl
+    // </React.StrictMode>
+  );
+}
+
+const tweetsFeedEl = document.getElementById('pop-feed')
+if(tweetsFeedEl){
+  // console.log(tweetsEl.dataset)
+  ReactDOM.render(
+    // <React.StrictMode>
+    e(FeedComponent, tweetsFeedEl.dataset),tweetsFeedEl
     // </React.StrictMode>
   );
 }
