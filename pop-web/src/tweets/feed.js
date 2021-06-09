@@ -24,8 +24,6 @@ export function FeedList(props){
         setNextUrl(response.next)
         setTweetsInit(response.results)
         setTweetsDidSet(true);
-        } else {
-            alert("There was an error 🤦🏼‍♀️")
         }
     }
     apiTweetFeed( handleTweetListLookup) // props.username must be passed as a dependecy below to fix the useEffect hook warning
@@ -51,9 +49,7 @@ export function FeedList(props){
                     setTweetsInit(newTweets)
                     setTweets(newTweets)
                     // setTweetsDidSet(true);
-                    } else {
-                        alert("There was an error 🤦🏼‍♀️")
-                    }
+                    } 
             }
             apiTweetFeed(handleLoadNextResponse, nextUrl)
         }
