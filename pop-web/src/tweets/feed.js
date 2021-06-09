@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { apiTweetList } from './lookup';
+import { apiTweetFeed } from './lookup';
 import { Tweet } from './detail';
 
 
-export function TweetList(props){
+export function FeedList(props){
     const [ tweetsInit, setTweetsInit ] = useState([]);
     const [ tweets, setTweets ] = useState([]);
     const [ nextUrl, setNextUrl ] = useState(null);
     const [ tweetsDidSet, setTweetsDidSet ] = useState(false);
-    // console.log(props.newTweets)
+
     useEffect(() =>{
         const final = [...props.newTweets].concat(tweetsInit)
         if(final.length !== tweets.length){
@@ -19,7 +19,7 @@ export function TweetList(props){
     useEffect(() => {
         if(tweetsDidSet === false){
     const handleTweetListLookup = (response, status) =>{
-        // console.log(response, status)
+    
         if (status === 200){
         setNextUrl(response.next)
         setTweetsInit(response.results)
@@ -28,7 +28,7 @@ export function TweetList(props){
             alert("There was an error 🤦🏼‍♀️")
         }
     }
-    apiTweetList(props.username, handleTweetListLookup) // props.username must be passed as a dependecy below to fix the useEffect hook warning
+    apiTweetFeed(props.username, handleTweetListLookup) // props.username must be passed as a dependecy below to fix the useEffect hook warning
 }
     }, [tweetsInit, tweetsDidSet , setTweetsDidSet, props.username])
 
@@ -55,7 +55,7 @@ export function TweetList(props){
                         alert("There was an error 🤦🏼‍♀️")
                     }
             }
-            apiTweetList(props.username, handleLoadNextResponse, nextUrl)
+            apiTweetFeed(handleLoadNextResponse, nextUrl)
         }
     }
 
