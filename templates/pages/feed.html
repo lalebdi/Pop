@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<div id="pop-feed"></div>
+
+{% else %}
+
+<div id='pop'></div>
+
+{% endif %}
+
+
+
+{% endblock content %}
