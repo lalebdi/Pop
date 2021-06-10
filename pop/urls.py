@@ -21,13 +21,14 @@ from django.urls import path, include
 from django.urls.conf import re_path
 from django.views.generic import TemplateView
 
-from tweets.views import tweets_list_view,  tweets_detail_view #tweets_profile_view
+from tweets.views import tweets_list_view, tweets_detail_view, home_view #tweets_profile_view
 from accounts.views import login_view, logout_view, register_view
 # from tweets.views import home_view, tweet_action_view, tweet_delete_view, tweet_list_view, tweet_detail_view, tweet_create_view
 
 urlpatterns = [
+    path('', home_view),
     path('admin/', admin.site.urls),
-    path('', tweets_list_view),
+    path('global/', tweets_list_view),
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
