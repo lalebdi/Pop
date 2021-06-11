@@ -6,11 +6,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from pop.settings import ALLOWED_HOSTS
 from ..models import Profile
+from ..serializers import PublicProfileSerializer
 
 # Create your views here.
 
 User = get_user_model()
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
+
+@api_view(['GET']) # That means the method the client sends == POST
+def profile_detail_api_view(request, username, *args, **kwargs):
+    '''gets the profile for the passed name'''
+    qs = Profile.objects.filter(user__username = username) # user__username for the foreign key relationship
+    if not qs.exists():
+        return Response({"detail": "User not found"}, status=404)
+    profile_obj = qs.first() # <- profile_obj must be serialized
+    data = PublicProfileSerializer(instance=profile_obj)
+    return Response(data.data, status=200)
 
 
 @api_view(['GET','POST']) # That means the method the client sends == POST
