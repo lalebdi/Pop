@@ -12,11 +12,13 @@ class FollowerRelation(models.Model):
     profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
     '''
     project_obj = Profile.objects.first()
     project_obj.followers.all() -> all users following this profile
     user.following.all() -> All user profiles I follow
     '''
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # One to One is for one user to have one profile
