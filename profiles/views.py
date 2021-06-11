@@ -36,6 +36,7 @@ def profile_update_view(request, *args, **kwargs):
 
 
 def profile_detail_view(request, username, *args, **kwargs):
+    '''gets the profile for the passed name'''
     qs = Profile.objects.filter(user__username = username) # user__username for the foreign key relationship
     if not qs.exists():
         raise Http404
