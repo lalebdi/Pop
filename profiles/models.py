@@ -25,3 +25,6 @@ class Profile(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     followers = models.ManyToManyField(User, related_name='following', blank=True)
+
+
+    # TODO: Missing a function here user_did_save I think
