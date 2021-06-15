@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { apiProfileDetail } from './lookup'
-import { UserDisplay } from './components'
+import { UserDisplay, UserPicture } from './components'
+
 
 export function ProfileBadge(props){
     const { user } = props
     console.log(user)
     return user ? <div>
+            <UserPicture user={user} hideLink />
             <p><UserDisplay user={user} inludeFullName hideLink/></p>
         </div> : null
 }
