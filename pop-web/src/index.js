@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { FeedComponent, TweetsComponent, TweetDetailComponent } from './tweets';  
 import reportWebVitals from './reportWebVitals';
-import { ProfileBadge } from './profiles'
+import { ProfileBadgeComponent } from './profiles'
 
 
 const appEl = document.getElementById('root')
@@ -50,7 +50,7 @@ const userProfileBadgeElements = document.querySelectorAll(".pop-profile-badge")
 
 userProfileBadgeElements.forEach(container => {
   ReactDOM.render(
-    e(ProfileBadge, container.dataset), container
+    e(ProfileBadgeComponent, container.dataset), container
   )
 });
 // If you want to start measuring performance in your app, pass a function
