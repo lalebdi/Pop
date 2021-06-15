@@ -10,7 +10,7 @@ export {
     TweetCreate,
     Tweet,
     TweetList,
-    FeedComponent,
+    FeedComponent, 
     TweetsComponent,
     TweetDetailComponent
 }
