@@ -155,6 +155,7 @@ if DEBUG:
     DEFAULT_RENDERER_CLASSES += [
         'rest_framework.renderers.BrowsableAPIRenderer',
     ]
+    # TODO: comment the custom authentication below before going to production
     DEFAULT_AUTHENTICATION_CLASSES += [ # Custom authentication
         'pop.rest_api.dev.DevAuthentication'
     ]
