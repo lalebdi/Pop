@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { FeedComponent, TweetsComponent, TweetDetailComponent } from './tweets';  
 import reportWebVitals from './reportWebVitals';
+import { ProfileBadge } from './profiles'
 
 
 const appEl = document.getElementById('root')
@@ -44,6 +45,14 @@ tweetDetailElements.forEach(container => {
   )
 });
 
+
+const userProfileBadgeElements = document.querySelectorAll(".pop-profile-badge")
+
+userProfileBadgeElements.forEach(container => {
+  ReactDOM.render(
+    e(ProfileBadge, container.dataset), container
+  )
+});
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
