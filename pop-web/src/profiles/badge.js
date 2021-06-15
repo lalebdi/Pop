@@ -4,20 +4,30 @@ import { UserDisplay, UserPicture } from './components'
 
 
 export function ProfileBadge(props){
-    const { user } = props
-    console.log(user)
+    const { user, didFollowToggle, profileLoading } = props
+    // console.log(user)
+    const currentVerb = (user && user.is_following) ? "Unfollow" : "Follow"
+    const handleFollowToggle = (event) =>{
+        // console.log(event)
+        event.preventDefault()
+        if (didFollowToggle && !profileLoading) {
+            didFollowToggle(currentVerb)
+        }
+    }
     return user ? <div>
             <UserPicture user={user} hideLink />
             <p><UserDisplay user={user} inludeFullName hideLink/></p>
+            <button className='btn btn-primary' onClick={handleFollowToggle}>{currentVerb}</button>
         </div> : null
 }
 
-export function ProfileBadgeComponent(props) {
+export function ProfileBadgeComponent(props) { // !parent component -> should handle the lookup
     const { username } = props
 
     // doing the lookup
     const [didLookup, setDidLookup] = useState(false);
     const [profile, setProfile] = useState(null)
+    const [profileLoading, setProfileLoading] = useState(false)
 
     const handleBackendLookup = (response, status) =>{
         if(status === 200){
@@ -31,6 +41,12 @@ export function ProfileBadgeComponent(props) {
         }
 
     }, [username, didLookup, setDidLookup]) 
-    return didLookup === false ? "Loading... 🤓" : profile ? <ProfileBadge user={profile} /> : null
+
+    const handleNewFollow = (actionVerb) => {
+        console.log(actionVerb)
+        setProfileLoading(true)
+    }
+
+    return didLookup === false ? "Loading... 🤓" : profile ? <ProfileBadge user={profile} didFollowToggle={handleNewFollow} profileLoading={profileLoading} /> : null
     
 }
