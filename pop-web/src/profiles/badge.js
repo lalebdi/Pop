@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { apiProfileDetail } from './lookup'
 
-export default function ProfileBadge(props) {
+export function ProfileBadge(props) {
     const { username } = props
 
     // doing the lookup
