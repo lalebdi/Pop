@@ -62,6 +62,8 @@ This is a microblogging app I am currently working on with a plan to deploy this
 * [Django 2.2](https://www.djangoproject.com)
 * [React](https://reactjs.org)
 * [BootStrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
+* [FramerMotion](https://www.framer.com/motion/)
+* [DraftJS](https://draftjs.org/)
 
 
 
