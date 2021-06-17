@@ -4,7 +4,6 @@ import {UserDisplay, UserPicture} from './components'
 import {apiProfileDetail, apiProfileFollowToggle} from './lookup'
 
 
-// ! Investigate when a user follow themselves or if there are no users. expreienced a crash in this commit. 
 
 function ProfileBadge(props) {
     const {user, didFollowToggle, profileLoading} = props
