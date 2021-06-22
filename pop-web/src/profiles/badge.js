@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import numeral from 'numeral'
+import { DisplayCount } from './utils'
 
 import {UserDisplay, UserPicture} from './components'
 import {apiProfileDetail, apiProfileFollowToggle} from './lookup'
 
 
 
-function DisplayCount(props){
-    return <span className={props.className}>{numeral(props.children).format("0a")}</span>
-}
+
 
 
 function ProfileBadge(props) {
