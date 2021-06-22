@@ -7,7 +7,7 @@ import {apiProfileDetail, apiProfileFollowToggle} from './lookup'
 
 
 function DisplayCount(props){
-    return <span className={props.className}>{numeral(props.children).format("0.0a")}</span>
+    return <span className={props.className}>{numeral(props.children).format("0a")}</span>
 }
 
 
