@@ -6,9 +6,6 @@ import {apiProfileDetail, apiProfileFollowToggle} from './lookup'
 
 
 
-
-
-
 function ProfileBadge(props) {
     const {user, didFollowToggle, profileLoading} = props
     let currentVerb = (user && user.is_following) ? "Unfollow" : "Follow"
